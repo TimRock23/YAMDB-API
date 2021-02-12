@@ -15,7 +15,7 @@ services:
       - ./.env
 
   web:
-    build: .
+    build: timrock/yamdb_final:latest
     restart: always
     volumes:
       - ./static:/code/static
