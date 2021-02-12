@@ -75,13 +75,10 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd ${{ env.PROJECT_ROOT }}
-            sudo apt-get update -y
-            sudo apt-get remove docker docker-engine docker.io -y
-            sudo apt install docker.io docker-compose -y
-            sudo systemctl start docker
-            sudo docker pull timrock/yamdb_final
-            sudo docker-compose down -v
-            sudo docker-compose up
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final:latest
+            sudo docker-compose stop
+            sudo docker-compose rm web
+            sudo docker-compose up -d
 
   send_message:
     runs-on: ubuntu-latest
