@@ -55,16 +55,6 @@ jobs:
     needs: build_and_push_to_docker_hub
 
     steps:
-      - name: copy docker-compose and nginx
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
-          source: "docker-compose.yaml, nginx/default.conf, static, media"
-          target: ${{ env.PROJECT_ROOT}}
-
       - name: executing remote ssh commands to deploy
         uses: appleboy/ssh-action@master
         with:
@@ -72,6 +62,8 @@ jobs:
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
           passphrase: ${{ secrets.PASSPHRASE }}
+          source: "docker-compose.yaml, nginx/default.conf, static, media"
+          target: ${{ env.PROJECT_ROOT}}
           script: |
             cd ${{ env.PROJECT_ROOT }}
             sudo apt install docker.io
