@@ -50,13 +50,13 @@ jobs:
 
   deploy:
     env:
-      PROJECT_ROOT: ~/www/yamdb_final
+      PROJECT_ROOT: ~/yamdb_final
     runs-on: ubuntu-latest
     needs: build_and_push_to_docker_hub
 
     steps:
-      - name: executing remote ssh commands to deploy
-        uses: appleboy/ssh-action@master
+      - name: copy docker-compose and nginx
+        uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
@@ -64,14 +64,22 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           source: "docker-compose.yaml, nginx/default.conf, static, media"
           target: ${{ env.PROJECT_ROOT}}
+
+      - name: executing remote ssh commands to deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd ${{ env.PROJECT_ROOT }}
-            sudo apt-get install docker-ce docker-ce-cli containerd.io
+            sudo apt install docker.io
             sudo curl -L "https://github.com/docker/compose/releases/download/1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
             sudo chmod +x /usr/local/bin/docker-compose
             sudo docker pull timrock/yamdb_final
             sudo docker stop $(sudo docker ps -a -q)
-            sudo docker run --rm -d -p 5000:5000 timrock/api_yamdb
+            sudo docker run --rm -d -p 5000:5000 timrock/yamdb_final
 
   send_message:
     runs-on: ubuntu-latest
