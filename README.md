@@ -104,6 +104,29 @@
 `/api/v1/titles/{titles_id}/ (GET, PATCH, DELETE)`
 
 ***
+## Запуск проекта (Docker)  
+1. Запустить docker-compose:
+
+`docker-compose up`
+
+2. При первом запуске для функционирования проекта обязательно создать и выполнить миграции:
+
+`docker-compose exec web python manage.py makemigrations`
+`docker-compose exec web python manage.py migrate`
+
+3. Чтобы загрузить список ингредиентов в БД:
+
+`docker-compose exec web python manage.py loaddata fixtures.json`
+
+4. Для прорисовки статики выполните команду:
+
+`docker-compose exec python manage.py collectstatic`
+
+5. Для создания суперпользователя введите следующую команду:
+
+`docker-compose exec web python manage.py createsuperuser`
+
+***
 ## **Технологии**
 - [Python](https://www.python.org/)
 - [Django](https://www.djangoproject.com/)
