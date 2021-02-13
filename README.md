@@ -1,4 +1,4 @@
-![Workflow status](https://github.com/TimRock23/yamdb_final/workflows/yamdb_workflow/badge.svg)
+![yamdb-api workflow](https://github.com/TimRock23/yamdb_final/workflows/yamdb-api%20workflow/badge.svg)
 
 # **YAMDB**
 **REST API для сервиса YaMDB** — базы данных о фильмах, книгах и музыке.
@@ -147,3 +147,6 @@
   + эндпойнты;
   + права доступа для запросов;
   + рейтинги произведений.
+  
+***
+[Посмотреть развернутый проект](4.252.131.136)
