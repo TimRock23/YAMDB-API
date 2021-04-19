@@ -131,6 +131,9 @@
 - [Django](https://www.djangoproject.com/)
 - [Django REST framework](https://www.django-rest-framework.org/)
 - [DRF Simple JWT](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
+- [Nginx](https://nginx.org/)
+- [Docker](https://www.docker.com/)
+- [GitHub Actions](https://github.com/features/actions)
 ***
 ## **Участники**
 - [timrock23](https://github.com/TimRock23) - управление пользователями (Auth и Users):
