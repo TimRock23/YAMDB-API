@@ -1,5 +1,3 @@
-![yamdb-api workflow](https://github.com/TimRock23/yamdb_final/workflows/yamdb-api%20workflow/badge.svg)
-
 # **YAMDB**
 **REST API для сервиса YaMDB** — базы данных о фильмах, книгах и музыке.
 ***
